@@ -1,0 +1,8 @@
+{
+    "points": [
+        { "init" : 5 },
+        { "peek": 5 },
+        { "insert" : 5 },
+        { "remove": 5 }
+    ]
+}
