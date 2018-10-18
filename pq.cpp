@@ -125,13 +125,14 @@ void fix_from_top(pq* queue, int cursor_index) {
 }
 
 string remove(pq* &queue) {
-  // // DEBUG
-  // for (int i = 0; i < queue->length; i ++) {
-  //   cout << endl;
-  //   cout << queue->items[i]->text << ", ";
-  // }
-  //   cout << endl;
-  // // END DEBUG
+  // DEBUG
+  for (int i = 0; i < queue->length; i ++) {
+    cout << queue->items[i]->text << "(" << queue->items[i]->priority << ")" << endl;
+  }
+
+  cout << endl;
+  cout << endl;
+  // END DEBUG
 
   if (queue->length > 0) {
     string text = queue->items[0]->text;
@@ -145,6 +146,22 @@ string remove(pq* &queue) {
 
     // Swap root with children until invariant satisfied.
     fix_from_top(queue, 0);
+
+    // If the new top has the same priority as a child, swap the nodes
+    // to preserve the first in, first out subordering.
+    if (queue->length > 1 && queue->items[0]->priority == queue->items[1]->priority) {
+      pq_item* root = queue->items[0];
+      pq_item* child = queue->items[1];
+      queue->items[0] = child;
+      queue->items[1] = root;
+    }
+
+    if (queue->length > 2 && queue->items[0]->priority == queue->items[2]->priority) {
+      pq_item* root = queue->items[0];
+      pq_item* child = queue->items[2];
+      queue->items[0] = child;
+      queue->items[2] = root;
+    }
 
     // // DEBUG
     // for (int i = 0; i < queue->length; i ++) {
