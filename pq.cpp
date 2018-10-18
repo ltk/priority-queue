@@ -12,7 +12,6 @@
 // Your Name: Lawson Kurtz
 
 #include <string>
-#include <iostream>
 #include "pq.h"
 
 pq_item* init_pq_item(float priority, string text) {
@@ -101,39 +100,9 @@ void fix_from_top(pq* queue, int cursor_index) {
     queue->items[child_index] = cursor;
     return fix_from_top(queue, child_index);
   } 
-
-
-  // if there is a first child, and the priority of that child is higher,
-  // swap with the root. Then recurse.
-  // if (in_bounds(first_child_index, queue) && queue->items[first_child_index]->priority > queue->items[cursor_index]->priority) {
-  //   pq_item* cursor = queue->items[cursor_index];
-  //   pq_item* child = queue->items[first_child_index];
-  //   queue->items[cursor_index] = child;
-  //   queue->items[first_child_index] = cursor;
-  //   return fix_from_top(queue, first_child_index);
-  // }
-
-  // If there is a second child, and the priority of that child is higher,
-  // swap with the root. Then recurse.
-  // if (in_bounds(first_child_index + 1, queue) && queue->items[first_child_index + 1]->priority > queue->items[cursor_index]->priority) {
-  //   pq_item* cursor = queue->items[cursor_index];
-  //   pq_item* child = queue->items[first_child_index + 1];
-  //   queue->items[cursor_index] = child;
-  //   queue->items[first_child_index + 1] = cursor;
-  //   return fix_from_top(queue, first_child_index + 1);
-  // }
 }
 
 string remove(pq* &queue) {
-  // DEBUG
-  for (int i = 0; i < queue->length; i ++) {
-    cout << queue->items[i]->text << "(" << queue->items[i]->priority << ")" << endl;
-  }
-
-  cout << endl;
-  cout << endl;
-  // END DEBUG
-
   if (queue->length > 0) {
     string text = queue->items[0]->text;
 
@@ -163,14 +132,6 @@ string remove(pq* &queue) {
       queue->items[2] = root;
     }
 
-    // // DEBUG
-    // for (int i = 0; i < queue->length; i ++) {
-    //   cout << endl;
-    //   cout << queue->items[i]->text << ", ";
-    // }
-    // // END DEBUG
-
-    // queue->items.pop();
     return text;
   }
 
